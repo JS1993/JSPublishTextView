@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "JSPublishTextView.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextViewDelegate>
 
 @end
 
@@ -16,12 +17,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    JSPublishTextView* pubTV=[[JSPublishTextView alloc]init];
+    pubTV.frame=CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 500);
+    pubTV.backgroundColor=[UIColor redColor];
+    pubTV.placeHolderColor=[UIColor yellowColor];
+    pubTV.font=[UIFont systemFontOfSize:20.0];
+    
+    pubTV.delegate=self;
+ pubTV.placeHolder=@"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    
+    [self.view addSubview:pubTV];
+    
+    
+    [pubTV becomeFirstResponder];
 }
 
 @end

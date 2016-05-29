@@ -23,7 +23,6 @@
 {
     if (_placeHolderLabel==nil) {
         _placeHolderLabel=[[UILabel alloc]init];
-        _placeHolderLabel.frame=CGRectMake(4, 7, _placeHolderLabel.frame.size.width, _placeHolderLabel.frame.size.height);
         _placeHolderLabel.font=self.font;
         _placeHolderLabel.textColor=[UIColor grayColor];
         
@@ -47,6 +46,9 @@
     [self setUp];
 }
 
+/**
+ *  初始化控件操作
+ */
 -(void)setUp{
     
     self.alwaysBounceVertical=YES;
@@ -58,17 +60,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged) name:UITextViewTextDidChangeNotification object:nil];
 }
 
+
 -(void)layoutSubviews{
     [super layoutSubviews];
     
-    CGFloat labelWidth= self.frame.size.width-_placeHolderLabel.frame.origin.x*2;
+    CGFloat labelWidth= self.frame.size.width-4*2;
     
-    self.placeHolderLabel.bounds=CGRectMake(0, 0, labelWidth, self.placeHolderLabel.bounds.size.height);
+    self.placeHolderLabel.frame=CGRectMake(4, 7, labelWidth, self.placeHolderLabel.bounds.size.height);
     
     [self.placeHolderLabel sizeToFit];
 }
 
-#pragma mark--可以不用label直接将占位文字
+#pragma mark--可以不用label直接将占位文字绘制上去，此方法需在下面的setter方法调用setNeedsDisplay方法
 //- (void)drawRect:(CGRect)rect {
 //
 //    //如果有文字，就直接返回
